@@ -83,7 +83,10 @@ const addConfig = (e: MouseEvent) => {
   });
 };
 
-const clearConfig = () => {
+const clearConfig = (e: MouseEvent) => {
+  e.preventDefault();
+
+  configRef.value?.restoreValidation();
   params.contents = [];
 };
 
@@ -194,7 +197,7 @@ const saveTypes = reactive({
           <n-button type="info" block @click="addConfig" attr-type="button">
             添加配置项
           </n-button>
-          <n-button block @click="clearConfig">清空配置项</n-button>
+          <n-button block @click="clearConfig">重置配置项</n-button>
         </n-space>
       </n-form>
 
