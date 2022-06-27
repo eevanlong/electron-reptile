@@ -26,20 +26,23 @@ async function createWindow() {
 
   win = new BrowserWindow({
     title: 'Main window',
-    width: 1200,
+    width: 600,
     height: 1000,
     webPreferences: {
       preload: splash,
       nodeIntegration: true,
       contextIsolation: false,
     },
+    frame: false, //取消window自带的关闭最小化等
+    resizable: false, //禁止改变主窗口尺寸
+    transparent: true,
   });
 
   if (app.isPackaged) {
     win.loadFile(join(__dirname, '../../index.html'));
   } else {
     win.loadURL(url);
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
   }
 
   // Test active push message to Renderer-process

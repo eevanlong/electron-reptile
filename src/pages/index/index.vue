@@ -143,11 +143,11 @@ const saveTypes = reactive({
 </script>
 
 <template>
-  <div>
+  <div class="home">
     <n-space vertical>
-      <div style="font-weight: bold; text-align: center; margin-bottom: 30px">
+      <!-- <div style="font-weight: bold; text-align: center; margin-bottom: 30px">
         你添加了 {{ params.contents.length }} 个配置项
-      </div>
+      </div> -->
       <n-form
         ref="configRef"
         :model="params"
@@ -279,3 +279,9 @@ const saveTypes = reactive({
     </n-space>
   </div>
 </template>
+
+<style scoped>
+.home {
+  padding: 30px;
+}
+</style>
