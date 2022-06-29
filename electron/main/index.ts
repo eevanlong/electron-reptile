@@ -2,6 +2,9 @@ import { app, BrowserWindow, shell, ipcMain, Menu } from 'electron';
 import { release } from 'os';
 import { join } from 'path';
 
+import remote from '@electron/remote/main';
+remote.initialize();
+
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration();
 
@@ -29,14 +32,19 @@ async function createWindow() {
     width: 600,
     height: 1000,
     webPreferences: {
+      plugins: true,
       preload: splash,
       nodeIntegration: true,
       contextIsolation: false,
+      webSecurity: false, // 禁止同源
     },
     frame: false, //取消window自带的关闭最小化等
     resizable: false, //禁止改变主窗口尺寸
     transparent: true,
+    // icon: './node.png',
   });
+
+  remote.enable(win.webContents);
 
   if (app.isPackaged) {
     win.loadFile(join(__dirname, '../../index.html'));
